@@ -11,6 +11,9 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Absolute link converter for Jekyll sites."
   spec.description   = <<-DESCRIPTION
+    Absolute link converter for Jekyll sites. Crawls the generated HTML files
+    in search of relative links and transform them to absolute links by
+    prepending the site domain.
   DESCRIPTION
 
   spec.files         = `git ls-files`.split("\n")
