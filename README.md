@@ -1,8 +1,8 @@
 # Jekyll Absolute Links
 
-Absolute link converter for Jekyll sites. Crawls the generated HTML files in
-search of relative links and transform them to absolute links by prepending the
-site domain.
+Absolute link converter for Jekyll sites. Crawls the generated HTML and XML
+files in search of relative links and transform them to absolute links by
+prepending the site domain.
 
 ## Installation
 
@@ -24,7 +24,7 @@ Or install it yourself as:
 $ gem install jekyll-absolute-links
 ```
 
-Finally add this line to `gems` setting in your `_config.yml` file:
+Finally add this line to `gems` section in your `_config.yml` file:
 
 ```yaml
 gems:
@@ -33,8 +33,8 @@ gems:
 
 ## Usage
 
-There's really nothing more to do. Links will be transformed automatically only
-for production site.
+There's really nothing more to do. Links will be transformed automatically for
+production site only.
 
 ## Development
 
