@@ -1,5 +1,7 @@
 # Jekyll Absolute Links
 
+[![Build Status](https://travis-ci.org/rukbotto/jekyll-absolute-links.svg?branch=master)](https://travis-ci.org/rukbotto/jekyll-absolute-links)
+
 Absolute link converter for Jekyll sites. Crawls the generated HTML and XML
 files in search of relative links and transform them to absolute links by
 prepending the site domain.
