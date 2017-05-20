@@ -1,0 +1,7 @@
+{% assign doc = include.doc %}
+<url>
+  <loc>{{ doc.url }}</loc>
+  {% if doc.date %}<lastmod>{{ doc.date | date_to_xmlschema }}</lastmod>{% endif %}
+  <changefreq>{{ doc.frequency }}</changefreq>
+  <priority>{{ doc.priority }}</priority>
+</url>
