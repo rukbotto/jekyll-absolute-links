@@ -1,6 +1,6 @@
 module JekyllAbsoluteLinks
   class Crawler
-    @regexp = %r{<(?!code)[^<>]*((href|src)=("|')|>)(([^<>]*(?<=&quot;))?(?<url>/[^<> ]*)((?=&quot;)[^<>]*)?)("|'|<(?!/code))[^<>]*>}
+    @regexp = %r{<code[\S\s]*?/code>|(?<="|'|&quot;|>|\()(?<url>/[^<>()" ]*)(?="|'|&quot;|</|\))}
 
     Jekyll::Hooks.register :posts, :post_render do |post|
       next if Jekyll::env == "development"
@@ -16,8 +16,14 @@ module JekyllAbsoluteLinks
       private
       def transform(output, regexp, site_url)
         output.gsub!(regexp) do |match|
-          url = Regexp.last_match[:url]
-          match.gsub(url, "#{site_url}#{url}".sub(%r{(\w)/+}, "\\1/"))
+          url = $~[:url]
+          new_url =
+            if url != nil
+              "#{site_url}#{url}".gsub(%r{(\w)/+}, "\\1/")
+            else
+              $~[0]
+            end
+          new_url
         end
       end
     end
