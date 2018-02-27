@@ -1,5 +1,4 @@
 url: http://example.com
-
 defaults:
   - scope:
       path: ""
@@ -7,9 +6,12 @@ defaults:
     values:
       layout: default
       permalink: /posts/:title/
-
   - scope:
       path: ""
       type: pages
     values:
       layout: default
+collections:
+  collection:
+    output: true
+    permalink: /:collection/:name/
