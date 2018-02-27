@@ -31,6 +31,11 @@ describe JekyllAbsoluteLinks::Crawler do
         expect(site.pages[1].output).to include(a)
       end
 
+      it "performs no link transformation in documents" do
+        a = "<a href=\"/posts/lorem-ipsum-dolor-sit-amet/\">"
+        expect(site.collections['collection'][0].output).to include(a)
+      end
+
       it "performs no link transformation on sitemaps" do
         loc = "<loc>/posts/lorem-ipsum-dolor-sit-amet/</loc>"
         expect(site.pages[2].output).to include(loc)
@@ -79,6 +84,11 @@ eos
       it "transforms relative links to absolute links on pages" do
         a = "<a href=\"http://example.com/posts/lorem-ipsum-dolor-sit-amet/\">"
         expect(site.pages[1].output).to include(a)
+      end
+
+      it "transforms relative links to absolute links in documents" do
+        a = "<a href=\"http://example.com/posts/lorem-ipsum-dolor-sit-amet/\">"
+        expect(site.collections['collection'][0].output).to include(a)
       end
 
       it "transforms relative links to absolute links on sitemaps" do
@@ -149,6 +159,11 @@ eos
         it "removes duplicate slashes from links on pages" do
           a = "<a href=\"http://example.com/posts/lorem-ipsum-dolor-sit-amet/\">"
           expect(site.pages[1].output).to include(a)
+        end
+
+        it "removes duplicate slashes from links in documents" do
+          a = "<a href=\"http://example.com/posts/lorem-ipsum-dolor-sit-amet/\">"
+          expect(site.collections['collection'][0].output).to include(a)
         end
 
         it "removes duplicate slashes from links on sitemaps" do

@@ -12,6 +12,11 @@ module JekyllAbsoluteLinks
       transform(page.output, @regexp, page.site.config["url"])
     end
 
+    Jekyll::Hooks.register :documents, :post_render do |document|
+      next if Jekyll::env == "development"
+      transform(document.output, @regexp, document.site.config["url"])
+    end
+
     class << self
       private
       def transform(output, regexp, site_url)
