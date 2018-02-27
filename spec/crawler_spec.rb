@@ -16,27 +16,32 @@ describe JekyllAbsoluteLinks::Crawler do
 
   context "When development environment is active" do
     describe "Crawler" do
-      it "performs no link transformation on posts" do
+      it "performs no link transformation in posts" do
         a = "<a href=\"/posts/curabitur-sed-condimentum-enim/\">"
         expect(site.posts[0].output).to include(a)
       end
 
-      it "performs no embedded link transformation on posts" do
+      it "performs no embedded link transformation in posts" do
         a = "<a href=\"https://www.facebook.com/sharer.php?u=/posts/lorem-ipsum-dolor-sit-amet/\">"
         expect(site.posts[0].output).to include(a)
       end
 
-      it "performs no link transformation on pages" do
+      it "performs no link transformation in pages" do
         a = "<a href=\"/posts/lorem-ipsum-dolor-sit-amet/\">"
         expect(site.pages[1].output).to include(a)
       end
 
-      it "performs no link transformation on sitemaps" do
+      it "performs no link transformation in documents" do
+        a = "<a href=\"/posts/lorem-ipsum-dolor-sit-amet/\">"
+        expect(site.collections['collection'][0].output).to include(a)
+      end
+
+      it "performs no link transformation in sitemaps" do
         loc = "<loc>/posts/lorem-ipsum-dolor-sit-amet/</loc>"
         expect(site.pages[2].output).to include(loc)
       end
 
-      it "performs no link transformation on feeds" do
+      it "performs no link transformation in feeds" do
         atom_link = "<atom:link href=\"/feed.xml\" rel=\"self\" type=\"application/rss+xml\"/>"
         expect(site.pages[0].output).to include(atom_link)
 
@@ -44,7 +49,7 @@ describe JekyllAbsoluteLinks::Crawler do
         expect(site.pages[0].output).to include(link)
       end
 
-      it "performs no link transformation on feeds" do
+      it "performs no embedded link transformation in feeds" do
         a = <<-eos
         <description>&lt;p&gt;Curabitur sed condimentum enim. Integer ut velit vitae ante facilisis
 consequat. Nullam egestas ipsum sit amet nibh ornare, non consequat massa
@@ -66,27 +71,32 @@ eos
     end
 
     describe "Crawler" do
-      it "transforms relative links to absolute links on posts" do
+      it "transforms relative links to absolute links in posts" do
         a = "<a href=\"http://example.com/posts/curabitur-sed-condimentum-enim/\">"
         expect(site.posts[0].output).to include(a)
       end
 
-      it "transforms embedded relative links to absolute links on posts" do
+      it "transforms embedded relative links to absolute links in posts" do
         a = "<a href=\"https://www.facebook.com/sharer.php?u=http://example.com/posts/lorem-ipsum-dolor-sit-amet/\">"
         expect(site.posts[0].output).to include(a)
       end
 
-      it "transforms relative links to absolute links on pages" do
+      it "transforms relative links to absolute links in pages" do
         a = "<a href=\"http://example.com/posts/lorem-ipsum-dolor-sit-amet/\">"
         expect(site.pages[1].output).to include(a)
       end
 
-      it "transforms relative links to absolute links on sitemaps" do
+      it "transforms relative links to absolute links in documents" do
+        a = "<a href=\"http://example.com/posts/lorem-ipsum-dolor-sit-amet/\">"
+        expect(site.collections['collection'][0].output).to include(a)
+      end
+
+      it "transforms relative links to absolute links in sitemaps" do
         loc = "<loc>http://example.com/posts/lorem-ipsum-dolor-sit-amet/</loc>"
         expect(site.pages[2].output).to include(loc)
       end
 
-      it "transforms relative links to absolute links on feeds" do
+      it "transforms relative links to absolute links in feeds" do
         atom_link = "<atom:link href=\"http://example.com/feed.xml\" rel=\"self\" type=\"application/rss+xml\"/>"
         expect(site.pages[0].output).to include(atom_link)
 
@@ -94,7 +104,7 @@ eos
         expect(site.pages[0].output).to include(link)
       end
 
-      it "transforms relative links to absolute links on feeds" do
+      it "transforms embedded relative links to absolute links in feeds" do
         a = <<-eos
         <description>&lt;p&gt;Curabitur sed condimentum enim. Integer ut velit vitae ante facilisis
 consequat. Nullam egestas ipsum sit amet nibh ornare, non consequat massa
@@ -136,27 +146,32 @@ eos
       end
 
       describe "Crawler" do
-        it "removes duplicate slashes from links on posts" do
+        it "removes duplicate slashes from links in posts" do
           a = "<a href=\"http://example.com/posts/curabitur-sed-condimentum-enim/\">"
           expect(site.posts[0].output).to include(a)
         end
 
-        it "removes duplicate slashes from embedded links on posts" do
+        it "removes duplicate slashes from embedded links in posts" do
           a = "<a href=\"https://www.facebook.com/sharer.php?u=http://example.com/posts/lorem-ipsum-dolor-sit-amet/\">"
           expect(site.posts[0].output).to include(a)
         end
 
-        it "removes duplicate slashes from links on pages" do
+        it "removes duplicate slashes from links in pages" do
           a = "<a href=\"http://example.com/posts/lorem-ipsum-dolor-sit-amet/\">"
           expect(site.pages[1].output).to include(a)
         end
 
-        it "removes duplicate slashes from links on sitemaps" do
+        it "removes duplicate slashes from links in documents" do
+          a = "<a href=\"http://example.com/posts/lorem-ipsum-dolor-sit-amet/\">"
+          expect(site.collections['collection'][0].output).to include(a)
+        end
+
+        it "removes duplicate slashes from links in sitemaps" do
           loc = "<loc>http://example.com/posts/lorem-ipsum-dolor-sit-amet/</loc>"
           expect(site.pages[2].output).to include(loc)
         end
 
-        it "removes duplicate slashes from links on feeds" do
+        it "removes duplicate slashes from links in feeds" do
           atom_link = "<atom:link href=\"http://example.com/feed.xml\" rel=\"self\" type=\"application/rss+xml\"/>"
           expect(site.pages[0].output).to include(atom_link)
 
@@ -164,7 +179,7 @@ eos
           expect(site.pages[0].output).to include(link)
         end
 
-        it "removes duplicate slashes from encoded links on feeds" do
+        it "removes duplicate slashes from embedded links in feeds" do
         a = <<-eos
         <description>&lt;p&gt;Curabitur sed condimentum enim. Integer ut velit vitae ante facilisis
 consequat. Nullam egestas ipsum sit amet nibh ornare, non consequat massa
