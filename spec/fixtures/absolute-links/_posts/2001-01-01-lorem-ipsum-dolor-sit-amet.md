@@ -25,7 +25,10 @@ egestas, est nibh euismod mauris, quis molestie libero ex in erat.
   Share on Facebook
 </a>
 
-Powered by [Jekyll][2]
+Powered by [Jekyll][2].
+
+Go [home][3].
 
 [1]: /posts/curabitur-sed-condimentum-enim/
 [2]: https://jekyllrb.com
+[3]: //example.com
