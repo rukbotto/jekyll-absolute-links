@@ -1,6 +1,6 @@
 module JekyllAbsoluteLinks
   class Crawler
-    @regexp = %r{<code[\S\s]*?/code>|(?<="|'|>|=|&quot;|&apos;|&gt;|&equals;)(?<url>/[\w/.-]*)(?!>|&gt;)}
+    @regexp = %r{<code[\S\s]*?/code>|(?<="|'|>|=|&quot;|&apos;|&gt;|&equals;)(?!//)(?<url>/[\w/.-]*)(?!>|&gt;)}
 
     Jekyll::Hooks.register :posts, :post_render do |post|
       next if Jekyll::env == "development"

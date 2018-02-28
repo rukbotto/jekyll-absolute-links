@@ -16,13 +16,23 @@ describe JekyllAbsoluteLinks::Crawler do
 
   context "When development environment is active" do
     describe "Crawler" do
-      it "performs no link transformation in posts" do
+      it "performs no relative link transformation in posts" do
         a = "<a href=\"/posts/curabitur-sed-condimentum-enim/\">"
         expect(site.posts[0].output).to include(a)
       end
 
       it "performs no embedded link transformation in posts" do
         a = "<a href=\"https://www.facebook.com/sharer.php?u=/posts/lorem-ipsum-dolor-sit-amet/\">"
+        expect(site.posts[0].output).to include(a)
+      end
+
+      it "performs no absolute link transformation in posts" do
+        a = "<a href=\"https://jekyllrb.com\">"
+        expect(site.posts[0].output).to include(a)
+      end
+
+      it "performs no protocol-relative link transformation in posts" do
+        a = "<a href=\"//example.com\">"
         expect(site.posts[0].output).to include(a)
       end
 
@@ -119,6 +129,11 @@ eos
 
       it "performs no link transformation for absolute links" do
         a = "<a href=\"https://jekyllrb.com\">"
+        expect(site.posts[0].output).to include(a)
+      end
+
+      it "performs no link transformation for protocol-relative links" do
+        a = "<a href=\"//example.com\">"
         expect(site.posts[0].output).to include(a)
       end
 
